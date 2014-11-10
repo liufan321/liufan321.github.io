@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Joy iOS &middot; 享受编程之美，尽享开发乐趣……
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0b">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>乐人之乐，人亦乐其乐</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item active" href="/">首页</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About Me</a>
+        
+      
+    
+      
+    
+
+    <a class="sidebar-nav-item" href="">GitHub project</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2014. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Joy iOS</a>
+            <small>享受编程之美，尽享开发乐趣……</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/11/11/introducing-lanyon/">
+        使用 Jekyll 和 GitHub Pages 搭建博客
+      </a>
+    </h1>
+
+    <span class="post-date">11 Nov 2014</span>
+
+    <h3>1. 注册 GitHub 账号并生成 SSH Keys</h3>
+
+<p><a href="https://github.com">GitHub</a>目前拥有140多万开发者用户，号称程序员的Facebook，具有极高的人气，许多重要的项目都托管在上面。</p>
+
+<p>注册一个 GitHub 账号，可以和世界优秀的程序员零距离接触，相信在不远的将来，我也会成为一名优秀的程序员，:P</p>
+
+<p>注册账号之后，为了方便使用，建议在本地生成一个 SSH Key，具体操作步骤可以访问 <a href="https://help.github.com/articles/generating-ssh-keys/">https://help.github.com/articles/generating-ssh-keys/</a>。</p>
+
+<h3>2. 为博客项目创建代码库并 clone 到本地</h3>
+
+<ul>
+<li>选择 Repositories，然后点击 New，创建一个代码库，代码库的名称是：[username].github.io</li>
+</ul>
+
+<blockquote>
+<p>提示：[username]，是注册的 GitHub 用户名</p>
+</blockquote>
+
+<ul>
+<li>在终端中将新建的代码库 clone 到本地</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git clone https://github.com/[username]/[username].github.io.git
+</code></pre></div>
+<h3>3. 安装相关软件</h3>
+
+<p>本环节的步骤只需执行一次即可：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ gem install bundler
+$ gem install github-pages
+$ cd [username].github.io.git
+$ vim Gemfile
+</code></pre></div>
+<p>在 Gemfile 中粘贴以下内容</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">source &#39;https://rubygems.org&#39;
+gem &#39;github-pages&#39;
+</code></pre></div>
+<h3>4. 选择并安装 Jekyll 模版</h3>
+
+<p>在 GitHub 中搜索 jekyll theme 然后选择一款喜欢的模板，下载到本地并且解压缩到自己的博客目录中。</p>
+
+<p>按照模板中的时候说明进行相应的配置，通常需要编辑一下 _config.yml 文件，设置自己博客的标题以及其他相关信息。</p>
+
+<h3>5. 编写博文 &amp; 测试</h3>
+
+<p>在 _posts 目录中，新建一个文件，文件名格式如下 </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">yyyy-MM-dd-topic-name.md
+</code></pre></div>
+<blockquote>
+<p>提示：topic-name中不要有中文、大写字符以及空格，如果有多个单词可以使用 &quot;-&quot; 连接。</p>
+</blockquote>
+
+<p>使用一款熟悉的文本编辑器打开这个 .md 文件，撰写博客内容即可。</p>
+
+<p>文章头部的格式如下：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">---
+layout: post
+title: 博文主题
+---
+</code></pre></div>
+<p>当然啦，在编写博客的时候测试，测试是必不可少的。打开终端中，进入本地博客代码库的主目录，然后输入：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ bundle exec jekyll serve
+</code></pre></div>
+<p>接着打开浏览器，在地址栏中输入</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">http://localhost:4000
+</code></pre></div>
+<p>就可以边写便刷新，查看博客的最终效果了，:P</p>
+
+<p>关于内容格式的方面，分享几个实用的技巧：</p>
+
+<ul>
+<li>  行首使用 # 表示标题1</li>
+<li>  行首使用 ## 表示标题2，依次类推……</li>
+<li>  行首使用 * 表示项目列表</li>
+<li>  行首使用 &gt; 表示引用文字</li>
+<li>  如果需要插入代码
+
+<ul>
+<li>  三个连续的 &#96;&#96;&#96; 回车(代码段开始)</li>
+<li>  粘贴代码块</li>
+<li>  三个连续的 &#96;&#96;&#96; 回车(代码段结束)</li>
+</ul></li>
+</ul>
+
+<p>怎么样？感觉还不错吧，哈哈！</p>
+
+<h3>6. 提交博文</h3>
+
+<p>在终端中输入：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git add .
+$ git commit -a -m &quot;新建文章&quot;
+$ git push
+</code></pre></div>
+<blockquote>
+<p>如果是第一次提交，GitHub 大概需要 15 分钟左右生成博客，此后就可以通过 [username].github.io 访问新的博客了，:P</p>
+</blockquote>
+
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <span class="pagination-item older">Older</span>
+  
+  
+    <span class="pagination-item newer">Newer</span>
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

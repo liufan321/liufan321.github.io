@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Joy iOS</title>
+ <link href="https://liufan321.github.io/atom.xml" rel="self"/>
+ <link href="https://liufan321.github.io/"/>
+ <updated>2014-11-11T05:26:45+08:00</updated>
+ <id>https://liufan321.github.io</id>
+ <author>
+   <name>老刘</name>
+   <email>liufan@joyios.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>使用 Jekyll 和 GitHub Pages 搭建博客</title>
+   <link href="https://liufan321.github.io/2014/11/11/introducing-lanyon/"/>
+   <updated>2014-11-11T00:00:00+08:00</updated>
+   <id>https://liufan321.github.io/2014/11/11/introducing-lanyon</id>
+   <content type="html">&lt;h3&gt;1. 注册 GitHub 账号并生成 SSH Keys&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com&quot;&gt;GitHub&lt;/a&gt;目前拥有140多万开发者用户，号称程序员的Facebook，具有极高的人气，许多重要的项目都托管在上面。&lt;/p&gt;
+
+&lt;p&gt;注册一个 GitHub 账号，可以和世界优秀的程序员零距离接触，相信在不远的将来，我也会成为一名优秀的程序员，:P&lt;/p&gt;
+
+&lt;p&gt;注册账号之后，为了方便使用，建议在本地生成一个 SSH Key，具体操作步骤可以访问 &lt;a href=&quot;https://help.github.com/articles/generating-ssh-keys/&quot;&gt;https://help.github.com/articles/generating-ssh-keys/&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3&gt;2. 为博客项目创建代码库并 clone 到本地&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;选择 Repositories，然后点击 New，创建一个代码库，代码库的名称是：[username].github.io&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;提示：[username]，是注册的 GitHub 用户名&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在终端中将新建的代码库 clone 到本地&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git clone https://github.com/[username]/[username].github.io.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;3. 安装相关软件&lt;/h3&gt;
+
+&lt;p&gt;本环节的步骤只需执行一次即可：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ gem install bundler
+$ gem install github-pages
+$ cd [username].github.io.git
+$ vim Gemfile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;在 Gemfile 中粘贴以下内容&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;source &amp;#39;https://rubygems.org&amp;#39;
+gem &amp;#39;github-pages&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;4. 选择并安装 Jekyll 模版&lt;/h3&gt;
+
+&lt;p&gt;在 GitHub 中搜索 jekyll theme 然后选择一款喜欢的模板，下载到本地并且解压缩到自己的博客目录中。&lt;/p&gt;
+
+&lt;p&gt;按照模板中的时候说明进行相应的配置，通常需要编辑一下 _config.yml 文件，设置自己博客的标题以及其他相关信息。&lt;/p&gt;
+
+&lt;h3&gt;5. 编写博文 &amp;amp; 测试&lt;/h3&gt;
+
+&lt;p&gt;在 _posts 目录中，新建一个文件，文件名格式如下 &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;yyyy-MM-dd-topic-name.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提示：topic-name中不要有中文、大写字符以及空格，如果有多个单词可以使用 &amp;quot;-&amp;quot; 连接。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;使用一款熟悉的文本编辑器打开这个 .md 文件，撰写博客内容即可。&lt;/p&gt;
+
+&lt;p&gt;文章头部的格式如下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;---
+layout: post
+title: 博文主题
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;当然啦，在编写博客的时候测试，测试是必不可少的。打开终端中，进入本地博客代码库的主目录，然后输入：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ bundle exec jekyll serve
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;接着打开浏览器，在地址栏中输入&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;http://localhost:4000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;就可以边写便刷新，查看博客的最终效果了，:P&lt;/p&gt;
+
+&lt;p&gt;关于内容格式的方面，分享几个实用的技巧：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;  行首使用 # 表示标题1&lt;/li&gt;
+&lt;li&gt;  行首使用 ## 表示标题2，依次类推……&lt;/li&gt;
+&lt;li&gt;  行首使用 * 表示项目列表&lt;/li&gt;
+&lt;li&gt;  行首使用 &amp;gt; 表示引用文字&lt;/li&gt;
+&lt;li&gt;  如果需要插入代码
+
+&lt;ul&gt;
+&lt;li&gt;  三个连续的 &amp;#96;&amp;#96;&amp;#96; 回车(代码段开始)&lt;/li&gt;
+&lt;li&gt;  粘贴代码块&lt;/li&gt;
+&lt;li&gt;  三个连续的 &amp;#96;&amp;#96;&amp;#96; 回车(代码段结束)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;怎么样？感觉还不错吧，哈哈！&lt;/p&gt;
+
+&lt;h3&gt;6. 提交博文&lt;/h3&gt;
+
+&lt;p&gt;在终端中输入：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git add .
+$ git commit -a -m &amp;quot;新建文章&amp;quot;
+$ git push
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果是第一次提交，GitHub 大概需要 15 分钟左右生成博客，此后就可以通过 [username].github.io 访问新的博客了，:P&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+
+</feed>

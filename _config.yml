@@ -1,0 +1,26 @@
+# Dependencies
+markdown:            redcarpet
+highlighter:         pygments
+
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+relative_permalinks: true
+
+# Setup
+title:               Joy iOS
+tagline:             '享受编程之美，尽享开发乐趣……'
+description:         '乐人之乐，人亦乐其乐'
+url:                 https://liufan321.github.io
+baseurl:             /
+paginate:            15
+
+# About/contact
+author:
+  name:              老刘
+  url:               https://liufan321.github.io
+  email:             liufan@joyios.com
+
+# Custom vars
+version:             1.0.0
