@@ -94,6 +94,51 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/2014/12/12/generate-doc-from-header-file/">
+        从.H文件中提取文档
+      </a>
+    </h1>
+
+    <span class="post-date">12 Dec 2014</span>
+
+    <h1>headerdoc2html</h1>
+
+<ul>
+<li><p>作用：处理头文件，并基于特殊格式的注释生成HTML文档</p></li>
+<li><p>示例：</p></li>
+</ul>
+
+<p><code>
+$ find . -name \*.h | xargs headerdoc2html -o ~/Desktop/docs -j
+</code></p>
+
+<ul>
+<li>说明：
+
+<ol>
+<li>遍历当前文件夹及子文件夹</li>
+<li>查找所有 .h 文件</li>
+<li>使用<code>headerdoc2html</code>生成 .h 的文档并输出至 ~/Desktop/docs 目录中</li>
+<li>允许 .h 文件中使用<code>javadoc</code>的注释格式 </li>
+<li><code>xargs</code>命令可以将<code>find</code>的结果分块传递给<code>headerdoc2html</code></li>
+</ol></li>
+</ul>
+
+<h1>从.h中提取文档</h1>
+
+<ul>
+<li>作用：处理<code>headerdoc2html</code>的输出目录，创建一个链接到每个标题文档的索引页面</li>
+<li>示例：</li>
+</ul>
+
+<p><code>
+$ gatherheaderdoc ~/Desktop/docs
+</code></p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/2014/11/11/introducing-lanyon/">
         使用 Jekyll 和 GitHub Pages 搭建博客
       </a>

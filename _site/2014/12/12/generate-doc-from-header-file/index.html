@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      从.H文件中提取文档 &middot; Joy iOS
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0b">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>乐人之乐，人亦乐其乐</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">首页</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About Me</a>
+        
+      
+    
+      
+    
+
+    <a class="sidebar-nav-item" href="http://github.com/liufan321">GitHub project</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2014. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Joy iOS</a>
+            <small>享受编程之美，尽享开发乐趣……</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">从.H文件中提取文档</h1>
+  <span class="post-date">12 Dec 2014</span>
+  <h1>headerdoc2html</h1>
+
+<ul>
+<li><p>作用：处理头文件，并基于特殊格式的注释生成HTML文档</p></li>
+<li><p>示例：</p></li>
+</ul>
+
+<p><code>
+$ find . -name \*.h | xargs headerdoc2html -o ~/Desktop/docs -j
+</code></p>
+
+<ul>
+<li>说明：
+
+<ol>
+<li>遍历当前文件夹及子文件夹</li>
+<li>查找所有 .h 文件</li>
+<li>使用<code>headerdoc2html</code>生成 .h 的文档并输出至 ~/Desktop/docs 目录中</li>
+<li>允许 .h 文件中使用<code>javadoc</code>的注释格式 </li>
+<li><code>xargs</code>命令可以将<code>find</code>的结果分块传递给<code>headerdoc2html</code></li>
+</ol></li>
+</ul>
+
+<h1>从.h中提取文档</h1>
+
+<ul>
+<li>作用：处理<code>headerdoc2html</code>的输出目录，创建一个链接到每个标题文档的索引页面</li>
+<li>示例：</li>
+</ul>
+
+<p><code>
+$ gatherheaderdoc ~/Desktop/docs
+</code></p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="//2014/11/11/introducing-lanyon/">
+            使用 Jekyll 和 GitHub Pages 搭建博客
+            <small>11 Nov 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

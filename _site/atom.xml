@@ -4,13 +4,54 @@
  <title>Joy iOS</title>
  <link href="https://liufan321.github.io/atom.xml" rel="self"/>
  <link href="https://liufan321.github.io/"/>
- <updated>2014-11-11T06:02:02+08:00</updated>
+ <updated>2014-12-13T13:41:12+08:00</updated>
  <id>https://liufan321.github.io</id>
  <author>
    <name>老刘</name>
    <email>liufan@joyios.com</email>
  </author>
 
+ 
+ <entry>
+   <title>从.H文件中提取文档</title>
+   <link href="https://liufan321.github.io/2014/12/12/generate-doc-from-header-file/"/>
+   <updated>2014-12-12T00:00:00+08:00</updated>
+   <id>https://liufan321.github.io/2014/12/12/generate-doc-from-header-file</id>
+   <content type="html">&lt;h1&gt;headerdoc2html&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;作用：处理头文件，并基于特殊格式的注释生成HTML文档&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ find . -name \*.h | xargs headerdoc2html -o ~/Desktop/docs -j
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;说明：
+
+&lt;ol&gt;
+&lt;li&gt;遍历当前文件夹及子文件夹&lt;/li&gt;
+&lt;li&gt;查找所有 .h 文件&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;headerdoc2html&lt;/code&gt;生成 .h 的文档并输出至 ~/Desktop/docs 目录中&lt;/li&gt;
+&lt;li&gt;允许 .h 文件中使用&lt;code&gt;javadoc&lt;/code&gt;的注释格式 &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;xargs&lt;/code&gt;命令可以将&lt;code&gt;find&lt;/code&gt;的结果分块传递给&lt;code&gt;headerdoc2html&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;从.h中提取文档&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;作用：处理&lt;code&gt;headerdoc2html&lt;/code&gt;的输出目录，创建一个链接到每个标题文档的索引页面&lt;/li&gt;
+&lt;li&gt;示例：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ gatherheaderdoc ~/Desktop/docs
+&lt;/code&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>使用 Jekyll 和 GitHub Pages 搭建博客</title>
