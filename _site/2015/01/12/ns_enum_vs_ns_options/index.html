@@ -11,7 +11,7 @@
 
   <title>
     
-      Joy iOS &middot; 享受编程之美，尽享开发乐趣……
+      NS_ENUM & NS_OPTIONS &middot; Joy iOS
     
   </title>
 
@@ -43,7 +43,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item active" href="/">首页</a>
+    <a class="sidebar-nav-item" href="/">首页</a>
 
     
 
@@ -90,18 +90,10 @@
       </div>
 
       <div class="container content">
-        <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/2015/01/12/ns_enum_vs_ns_options/">
-        NS_ENUM & NS_OPTIONS
-      </a>
-    </h1>
-
-    <span class="post-date">12 Jan 2015</span>
-
-    <p><code>NS_ENUM</code> 和 <code>NS_OPTIONS</code> 是在 iOS 6 推出用于代替 enum 的更好的办法</p>
+        <div class="post">
+  <h1 class="post-title">NS_ENUM & NS_OPTIONS</h1>
+  <span class="post-date">12 Jan 2015</span>
+  <p><code>NS_ENUM</code> 和 <code>NS_OPTIONS</code> 是在 iOS 6 推出用于代替 enum 的更好的办法</p>
 
 <h2>enum</h2>
 
@@ -205,170 +197,32 @@ typedef NSInteger UITableViewCellStyle;
 <li>如果不需要任何附加选项，直接传入 0，这样效率最高，:D</li>
 </ul>
 
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/2014/12/12/generate-doc-from-header-file/">
-        从.H文件中提取文档
-      </a>
-    </h1>
-
-    <span class="post-date">12 Dec 2014</span>
-
-    <h1>headerdoc2html</h1>
-
-<ul>
-<li><p>作用：处理头文件，并基于特殊格式的注释生成HTML文档</p></li>
-<li><p>示例：</p></li>
-</ul>
-
-<p><code>
-$ find . -name \*.h | xargs headerdoc2html -o ~/Desktop/docs -j
-</code></p>
-
-<ul>
-<li>说明：
-
-<ol>
-<li>遍历当前文件夹及子文件夹</li>
-<li>查找所有 .h 文件</li>
-<li>使用<code>headerdoc2html</code>生成 .h 的文档并输出至 ~/Desktop/docs 目录中</li>
-<li>允许 .h 文件中使用<code>javadoc</code>的注释格式 </li>
-<li><code>xargs</code>命令可以将<code>find</code>的结果分块传递给<code>headerdoc2html</code></li>
-</ol></li>
-</ul>
-
-<h1>从.h中提取文档</h1>
-
-<ul>
-<li>作用：处理<code>headerdoc2html</code>的输出目录，创建一个链接到每个标题文档的索引页面</li>
-<li>示例：</li>
-</ul>
-
-<p><code>
-$ gatherheaderdoc ~/Desktop/docs
-</code></p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/2014/11/11/introducing-lanyon/">
-        使用 Jekyll 和 GitHub Pages 搭建博客
-      </a>
-    </h1>
-
-    <span class="post-date">11 Nov 2014</span>
-
-    <h3>1. 注册 GitHub 账号并生成 SSH Keys</h3>
-
-<p><a href="https://github.com">GitHub</a>目前拥有140多万开发者用户，号称程序员的Facebook，具有极高的人气，许多重要的项目都托管在上面。</p>
-
-<p>注册一个 GitHub 账号，可以和世界优秀的程序员零距离接触，相信在不远的将来，我也会成为一名优秀的程序员，:P</p>
-
-<p>注册账号之后，为了方便使用，建议在本地生成一个 SSH Key，具体操作步骤可以访问 <a href="https://help.github.com/articles/generating-ssh-keys/">https://help.github.com/articles/generating-ssh-keys/</a>。</p>
-
-<h3>2. 为博客项目创建代码库并 clone 到本地</h3>
-
-<ul>
-<li>选择 Repositories，然后点击 New，创建一个代码库，代码库的名称是：[username].github.io</li>
-</ul>
-
-<blockquote>
-<p>提示：[username]，是注册的 GitHub 用户名</p>
-</blockquote>
-
-<ul>
-<li>在终端中将新建的代码库 clone 到本地</li>
-</ul>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git clone https://github.com/[username]/[username].github.io.git
-</code></pre></div>
-<h3>3. 安装相关软件</h3>
-
-<p>本环节的步骤只需执行一次即可：</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ gem install bundler
-$ gem install github-pages
-$ cd [username].github.io.git
-$ vim Gemfile
-</code></pre></div>
-<p>在 Gemfile 中粘贴以下内容</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">source &#39;https://rubygems.org&#39;
-gem &#39;github-pages&#39;
-</code></pre></div>
-<h3>4. 选择并安装 Jekyll 模版</h3>
-
-<p>在 GitHub 中搜索 jekyll theme 然后选择一款喜欢的模板，下载到本地并且解压缩到自己的博客目录中。</p>
-
-<p>按照模板中的时候说明进行相应的配置，通常需要编辑一下 _config.yml 文件，设置自己博客的标题以及其他相关信息。</p>
-
-<h3>5. 编写博文 &amp; 测试</h3>
-
-<p>在 _posts 目录中，新建一个文件，文件名格式如下 </p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">yyyy-MM-dd-topic-name.md
-</code></pre></div>
-<blockquote>
-<p>提示：topic-name中不要有中文、大写字符以及空格，如果有多个单词可以使用 &quot;-&quot; 连接。</p>
-</blockquote>
-
-<p>使用一款熟悉的文本编辑器打开这个 .md 文件，撰写博客内容即可。</p>
-
-<p>文章头部的格式如下：</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">---
-layout: post
-title: 博文主题
----
-</code></pre></div>
-<p>当然啦，在编写博客的时候测试，测试是必不可少的。打开终端中，进入本地博客代码库的主目录，然后输入：</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ bundle exec jekyll serve
-</code></pre></div>
-<p>接着打开浏览器，在地址栏中输入</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">http://localhost:4000
-</code></pre></div>
-<p>就可以边写便刷新，查看博客的最终效果了，:P</p>
-
-<p>关于内容格式的方面，分享几个实用的技巧：</p>
-
-<ul>
-<li>  行首使用 # 表示标题1</li>
-<li>  行首使用 ## 表示标题2，依次类推……</li>
-<li>  行首使用 * 表示项目列表</li>
-<li>  行首使用 &gt; 表示引用文字</li>
-<li>  如果需要插入代码
-
-<ul>
-<li>  三个连续的 &#96;&#96;&#96; 回车(代码段开始)</li>
-<li>  粘贴代码块</li>
-<li>  三个连续的 &#96;&#96;&#96; 回车(代码段结束)</li>
-</ul></li>
-</ul>
-
-<p>怎么样？感觉还不错吧，哈哈！</p>
-
-<h3>6. 提交博文</h3>
-
-<p>在终端中输入：</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git add .
-$ git commit -a -m &quot;新建文章&quot;
-$ git push
-</code></pre></div>
-<blockquote>
-<p>如果是第一次提交，GitHub 大概需要 15 分钟左右生成博客，此后就可以通过 [username].github.io 访问新的博客了，:P</p>
-</blockquote>
-
-  </div>
-  
 </div>
 
-<div class="pagination">
-  
-    <span class="pagination-item older">Older</span>
-  
-  
-    <span class="pagination-item newer">Newer</span>
-  
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="//2014/12/12/generate-doc-from-header-file/">
+            从.H文件中提取文档
+            <small>12 Dec 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="//2014/11/11/introducing-lanyon/">
+            使用 Jekyll 和 GitHub Pages 搭建博客
+            <small>11 Nov 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
 </div>
-
 
       </div>
     </div>

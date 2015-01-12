@@ -4,13 +4,124 @@
  <title>Joy iOS</title>
  <link href="https://liufan321.github.io/atom.xml" rel="self"/>
  <link href="https://liufan321.github.io/"/>
- <updated>2014-12-13T13:41:12+08:00</updated>
+ <updated>2015-01-12T09:32:57+08:00</updated>
  <id>https://liufan321.github.io</id>
  <author>
    <name>老刘</name>
    <email>liufan@joyios.com</email>
  </author>
 
+ 
+ <entry>
+   <title>NS_ENUM & NS_OPTIONS</title>
+   <link href="https://liufan321.github.io/2015/01/12/ns_enum_vs_ns_options/"/>
+   <updated>2015-01-12T00:00:00+08:00</updated>
+   <id>https://liufan321.github.io/2015/01/12/ns_enum_vs_ns_options</id>
+   <content type="html">&lt;p&gt;&lt;code&gt;NS_ENUM&lt;/code&gt; 和 &lt;code&gt;NS_OPTIONS&lt;/code&gt; 是在 iOS 6 推出用于代替 enum 的更好的办法&lt;/p&gt;
+
+&lt;h2&gt;enum&lt;/h2&gt;
+
+&lt;p&gt;在以前，要定义枚举类型，都是使用 &lt;code&gt;enum&lt;/code&gt; 来实现的，这是在 C 语言中预设定义常量的方法&lt;/p&gt;
+
+&lt;p&gt;使用 &lt;code&gt;enum&lt;/code&gt; 定义枚举可以有以下两种方式：&lt;/p&gt;
+
+&lt;h3&gt;1. 定义枚举&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;enum {
+    UITableViewCellStyleDefault,
+    UITableViewCellStyleValue1,
+    UITableViewCellStyleValue2,
+    UITableViewCellStyleSubtitle
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这种方法只定义枚举，但是不定义类型&lt;/p&gt;
+
+&lt;h3&gt;2. 定义枚举 同时定义类型&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;typedef enum {
+    UITableViewCellStyleDefault,
+    UITableViewCellStyleValue1,
+    UITableViewCellStyleValue2,
+    UITableViewCellStyleSubtitle
+} UITableViewCellStyle;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;定义 &lt;code&gt;UITableViewCellStyle&lt;/code&gt; 类型并且预设枚举类型&lt;/p&gt;
+
+&lt;p&gt;大概在 iOS 5.0 时期，苹果公司采用以下方式定义枚举类型&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;typedef enum {
+    UITableViewCellStyleDefault,
+    UITableViewCellStyleValue1,
+    UITableViewCellStyleValue2,
+    UITableViewCellStyleSubtitle
+};
+
+typedef NSInteger UITableViewCellStyle;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这种方式指定了 &lt;code&gt;UITableViewCellStyle&lt;/code&gt; 的数据类型，但并没有告诉编译器这个类型与之前的 &lt;code&gt;enum&lt;/code&gt; 有什么关系&lt;/p&gt;
+
+&lt;p&gt;再后来，苹果推出了 &lt;code&gt;NS_ENUM&lt;/code&gt; &amp;amp; &lt;code&gt;NS_OPTIONS&lt;/code&gt; 两个宏来定义枚举类型&lt;/p&gt;
+
+&lt;h2&gt;NS_ENUM&lt;/h2&gt;
+
+&lt;p&gt;如果查看今天的 &lt;code&gt;UITableViewCell.h&lt;/code&gt; 会发现，枚举类型的定义已经变为：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
+    UITableViewCellStyleDefault,
+    UITableViewCellStyleValue1, 
+    UITableViewCellStyleValue2, 
+    UITableViewCellStyleSubtitle
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;参数说明&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;枚举的数据类型&lt;/li&gt;
+&lt;li&gt;枚举类型的名称&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;大括号里面和以前 &lt;code&gt;enum&lt;/code&gt; 一样，是需要定义的预设值&lt;/p&gt;
+
+&lt;p&gt;这种实现方法可以在 &lt;code&gt;switch&lt;/code&gt; 语句中检查类型&lt;/p&gt;
+
+&lt;h2&gt;NS_OPTIONS&lt;/h2&gt;
+
+&lt;p&gt;在 C 语言开发时，也可以使用&lt;strong&gt;按位掩码（bitmask）&lt;/strong&gt;来定义枚举类型&lt;/p&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;typedef enum {
+    NSJSONReadingMutableContainers = (1UL &amp;lt;&amp;lt; 0),
+    NSJSONReadingMutableLeaves = (1UL &amp;lt;&amp;lt; 1),
+    NSJSONReadingAllowFragments = (1UL &amp;lt;&amp;lt; 2)
+} NSJSONReadingOptions;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;使用&lt;strong&gt;按位掩码&lt;/strong&gt;枚举的最大的好处在于：&lt;strong&gt;只使用一个参数便可以传递各种选项的组合&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用&lt;strong&gt;按位或(|)&lt;/strong&gt;为枚举类型赋值&lt;/li&gt;
+&lt;li&gt;使用&lt;strong&gt;按位与(&amp;amp;)&lt;/strong&gt;判断是否设置了某个选项&lt;/li&gt;
+&lt;li&gt;传入&lt;strong&gt;0&lt;/strong&gt;表示什么附加选线都没有&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在 OC 中，要定义按位掩码的枚举类型，可以使用 &lt;code&gt;NS_OPTIONS&lt;/code&gt; 宏，示例如下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;typedef NS_OPTIONS(NSUInteger, NSJSONReadingOptions) {
+    NSJSONReadingMutableContainers = (1UL &amp;lt;&amp;lt; 0),
+    NSJSONReadingMutableLeaves = (1UL &amp;lt;&amp;lt; 1),
+    NSJSONReadingAllowFragments = (1UL &amp;lt;&amp;lt; 2)
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;又如：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;typedef NS_OPTIONS(NSUInteger, NSKeyValueObservingOptions) {
+    NSKeyValueObservingOptionNew = 0x01,
+    NSKeyValueObservingOptionOld = 0x02,
+    NSKeyValueObservingOptionInitial = 0x04,
+    NSKeyValueObservingOptionPrior = 0x08
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;今后大家看到凡是用 &lt;code&gt;NS_OPTIONS&lt;/code&gt; 定义的枚举，就可以：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用&lt;strong&gt;按位或(|)&lt;/strong&gt;指定多个选项的组合&lt;/li&gt;
+&lt;li&gt;如果不需要任何附加选项，直接传入 0，这样效率最高，:D&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>从.H文件中提取文档</title>
