@@ -27,7 +27,7 @@ $ gitbook init
 5> 本地预览
 
 ```bash
-gitbook serve
+$ gitbook serve
 ```
 	
 6> 下载并安装 calibre，生成电子书使用

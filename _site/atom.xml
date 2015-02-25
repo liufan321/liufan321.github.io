@@ -4,7 +4,7 @@
  <title>Joy iOS</title>
  <link href="https://liufan321.github.io/atom.xml" rel="self"/>
  <link href="https://liufan321.github.io/"/>
- <updated>2015-02-26T07:25:26+08:00</updated>
+ <updated>2015-02-26T07:27:54+08:00</updated>
  <id>https://liufan321.github.io</id>
  <author>
    <name>老刘</name>
@@ -35,7 +35,7 @@
 &lt;/ul&gt;
 
 &lt;p&gt;5&amp;gt; 本地预览&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;gitbook serve
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook serve
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;6&amp;gt; 下载并安装 calibre，生成电子书使用&lt;/p&gt;
 
