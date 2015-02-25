@@ -94,6 +94,55 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/2015/02/26/gitbook_config/">
+        GitBook 配置
+      </a>
+    </h1>
+
+    <span class="post-date">26 Feb 2015</span>
+
+    <p>1&gt; 下载并安装 npm</p>
+
+<p>node-v0.12.0.pkg <a href="http://nodejs.org/download/">http://nodejs.org/download/</a></p>
+
+<p>2&gt; 安装 gitbook</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>npm install gitbook -g
+</code></pre></div>
+<p>3&gt; 进入终端 cd 到新建的电子书目录</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>touch SUMMARY.md
+<span class="nv">$ </span>gitbook init
+</code></pre></div>
+<p>4&gt; 下载并安装 gitbookEditor，gitbook 本地编辑器 <a href="https://github.com/GitbookIO/editor/releases">https://github.com/GitbookIO/editor/releases</a></p>
+
+<ul>
+<li>打开并选择刚刚 init 的目录即可编辑</li>
+</ul>
+
+<p>5&gt; 本地预览</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">gitbook serve
+</code></pre></div>
+<p>6&gt; 下载并安装 calibre，生成电子书使用</p>
+
+<p>calibre-2.20.0 <a href="http://calibre-ebook.com/download_osx">http://calibre-ebook.com/download_osx</a></p>
+
+<ul>
+<li>在终端输入</li>
+</ul>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/local/bin
+</code></pre></div>
+<p>7&gt; 生成电子书</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gitbook epub
+
+或者
+
+<span class="nv">$ </span>gitbook pdf
+</code></pre></div>
+<p>8&gt; .gitignore <a href="https://github.com/github/gitignore.git">https://github.com/github/gitignore.git</a>    </p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/2015/01/12/ns_enum_vs_ns_options/">
         NS_ENUM & NS_OPTIONS
       </a>

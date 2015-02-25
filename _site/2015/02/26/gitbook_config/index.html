@@ -11,7 +11,7 @@
 
   <title>
     
-      从.H文件中提取文档 &middot; Joy iOS
+      GitBook 配置 &middot; Joy iOS
     
   </title>
 
@@ -91,41 +91,45 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">从.H文件中提取文档</h1>
-  <span class="post-date">12 Dec 2014</span>
-  <h1>headerdoc2html</h1>
+  <h1 class="post-title">GitBook 配置</h1>
+  <span class="post-date">26 Feb 2015</span>
+  <p>1&gt; 下载并安装 npm</p>
+
+<p>node-v0.12.0.pkg <a href="http://nodejs.org/download/">http://nodejs.org/download/</a></p>
+
+<p>2&gt; 安装 gitbook</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>npm install gitbook -g
+</code></pre></div>
+<p>3&gt; 进入终端 cd 到新建的电子书目录</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>touch SUMMARY.md
+<span class="nv">$ </span>gitbook init
+</code></pre></div>
+<p>4&gt; 下载并安装 gitbookEditor，gitbook 本地编辑器 <a href="https://github.com/GitbookIO/editor/releases">https://github.com/GitbookIO/editor/releases</a></p>
 
 <ul>
-<li><p>作用：处理头文件，并基于特殊格式的注释生成HTML文档</p></li>
-<li><p>示例：</p></li>
+<li>打开并选择刚刚 init 的目录即可编辑</li>
 </ul>
 
-<p><code>
-$ find . -name \*.h | xargs headerdoc2html -o ~/Desktop/docs -j
-</code></p>
+<p>5&gt; 本地预览</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">gitbook serve
+</code></pre></div>
+<p>6&gt; 下载并安装 calibre，生成电子书使用</p>
+
+<p>calibre-2.20.0 <a href="http://calibre-ebook.com/download_osx">http://calibre-ebook.com/download_osx</a></p>
 
 <ul>
-<li>说明：
-
-<ol>
-<li>遍历当前文件夹及子文件夹</li>
-<li>查找所有 .h 文件</li>
-<li>使用<code>headerdoc2html</code>生成 .h 的文档并输出至 ~/Desktop/docs 目录中</li>
-<li>允许 .h 文件中使用<code>javadoc</code>的注释格式 </li>
-<li><code>xargs</code>命令可以将<code>find</code>的结果分块传递给<code>headerdoc2html</code></li>
-</ol></li>
+<li>在终端输入</li>
 </ul>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/local/bin
+</code></pre></div>
+<p>7&gt; 生成电子书</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gitbook epub
 
-<h1>从.h中提取文档</h1>
+或者
 
-<ul>
-<li>作用：处理<code>headerdoc2html</code>的输出目录，创建一个链接到每个标题文档的索引页面</li>
-<li>示例：</li>
-</ul>
-
-<p><code>
-$ gatherheaderdoc ~/Desktop/docs
-</code></p>
+<span class="nv">$ </span>gitbook pdf
+</code></pre></div>
+<p>8&gt; .gitignore <a href="https://github.com/github/gitignore.git">https://github.com/github/gitignore.git</a>    </p>
 
 </div>
 
@@ -135,18 +139,18 @@ $ gatherheaderdoc ~/Desktop/docs
     
       <li>
         <h3>
-          <a href="//2015/02/26/gitbook_config/">
-            GitBook 配置
-            <small>26 Feb 2015</small>
+          <a href="//2015/01/12/ns_enum_vs_ns_options/">
+            NS_ENUM & NS_OPTIONS
+            <small>12 Jan 2015</small>
           </a>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="//2015/01/12/ns_enum_vs_ns_options/">
-            NS_ENUM & NS_OPTIONS
-            <small>12 Jan 2015</small>
+          <a href="//2014/12/12/generate-doc-from-header-file/">
+            从.H文件中提取文档
+            <small>12 Dec 2014</small>
           </a>
         </h3>
       </li>

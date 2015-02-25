@@ -4,13 +4,58 @@
  <title>Joy iOS</title>
  <link href="https://liufan321.github.io/atom.xml" rel="self"/>
  <link href="https://liufan321.github.io/"/>
- <updated>2015-01-12T09:32:57+08:00</updated>
+ <updated>2015-02-26T07:25:26+08:00</updated>
  <id>https://liufan321.github.io</id>
  <author>
    <name>老刘</name>
    <email>liufan@joyios.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GitBook 配置</title>
+   <link href="https://liufan321.github.io/2015/02/26/gitbook_config/"/>
+   <updated>2015-02-26T00:00:00+08:00</updated>
+   <id>https://liufan321.github.io/2015/02/26/gitbook_config</id>
+   <content type="html">&lt;p&gt;1&amp;gt; 下载并安装 npm&lt;/p&gt;
+
+&lt;p&gt;node-v0.12.0.pkg &lt;a href=&quot;http://nodejs.org/download/&quot;&gt;http://nodejs.org/download/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2&amp;gt; 安装 gitbook&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm install gitbook -g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;3&amp;gt; 进入终端 cd 到新建的电子书目录&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;touch SUMMARY.md
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;4&amp;gt; 下载并安装 gitbookEditor，gitbook 本地编辑器 &lt;a href=&quot;https://github.com/GitbookIO/editor/releases&quot;&gt;https://github.com/GitbookIO/editor/releases&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;打开并选择刚刚 init 的目录即可编辑&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;5&amp;gt; 本地预览&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;gitbook serve
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;6&amp;gt; 下载并安装 calibre，生成电子书使用&lt;/p&gt;
+
+&lt;p&gt;calibre-2.20.0 &lt;a href=&quot;http://calibre-ebook.com/download_osx&quot;&gt;http://calibre-ebook.com/download_osx&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在终端输入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/local/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;7&amp;gt; 生成电子书&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook epub
+
+或者
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook pdf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;8&amp;gt; .gitignore &lt;a href=&quot;https://github.com/github/gitignore.git&quot;&gt;https://github.com/github/gitignore.git&lt;/a&gt;    &lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>NS_ENUM & NS_OPTIONS</title>
