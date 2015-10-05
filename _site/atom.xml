@@ -4,13 +4,59 @@
  <title>Joy iOS</title>
  <link href="https://liufan321.github.io/atom.xml" rel="self"/>
  <link href="https://liufan321.github.io/"/>
- <updated>2015-02-26T07:27:54+08:00</updated>
+ <updated>2015-10-05T21:29:40+08:00</updated>
  <id>https://liufan321.github.io</id>
  <author>
    <name>老刘</name>
    <email>liufan@joyios.com</email>
  </author>
 
+ 
+ <entry>
+   <title>BLOCK写递归</title>
+   <link href="https://liufan321.github.io/2015/06/24/objc_block_recursion/"/>
+   <updated>2015-06-24T00:00:00+08:00</updated>
+   <id>https://liufan321.github.io/2015/06/24/objc_block_recursion</id>
+   <content type="html">&lt;p&gt;今天又有同学面试被问到用 blcok 写递归了，写一个留在这里哈，有兴趣的同学面试前查阅一下。&lt;/p&gt;
+
+&lt;p&gt;首先来一个 oc 的递归：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objc&quot; data-lang=&quot;objc&quot;&gt;&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;写递归算法只需要记住两点即可：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;有一个明确的出口&lt;/li&gt;
+&lt;li&gt;不满足条件出口时，自己调用自己&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;按照以上思路用 block 改写一下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objc&quot; data-lang=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sumBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sumBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;注意，要做到自己调用自己，需要能够准确的在内存中找到 &lt;code&gt;block&lt;/code&gt; 的函数入口，因此需要使用 &lt;code&gt;static&lt;/code&gt; 修饰符号，其他就没啥了&lt;/p&gt;
+
+&lt;p&gt;另外，面试中如果被问到，一定要说下：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;每调用一次自己，系统都会开辟一个栈桢记录临时变量和参数&lt;/li&gt;
+&lt;li&gt;递归次数过多，会出现栈溢出错误&lt;/li&gt;
+&lt;li&gt;移动开发中不建议使用递归算法，现在主线程栈区只有 &lt;code&gt;512K&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上面的测试代码调用 &lt;code&gt;NSLog(@&amp;quot;%d&amp;quot;, sumBlock(1024 * 128));&lt;/code&gt; 就会出现栈溢出错误&lt;/p&gt;
+
+&lt;p&gt;提问：为啥 &lt;code&gt;1024 * 128&lt;/code&gt; 会栈溢出呢？:P&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GitBook 配置</title>
@@ -22,10 +68,11 @@
 &lt;p&gt;node-v0.12.0.pkg &lt;a href=&quot;http://nodejs.org/download/&quot;&gt;http://nodejs.org/download/&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;2&amp;gt; 安装 gitbook&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm install gitbook -g
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo npm install gitbook-cli -g
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;3&amp;gt; 进入终端 cd 到新建的电子书目录&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;touch SUMMARY.md
+&lt;span class=&quot;c&quot;&gt;# 第一次运行需要 sudo&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook init
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;4&amp;gt; 下载并安装 gitbookEditor，gitbook 本地编辑器 &lt;a href=&quot;https://github.com/GitbookIO/editor/releases&quot;&gt;https://github.com/GitbookIO/editor/releases&lt;/a&gt;&lt;/p&gt;
@@ -35,9 +82,14 @@
 &lt;/ul&gt;
 
 &lt;p&gt;5&amp;gt; 本地预览&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook serve
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 第一次运行需要 sudo&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook serve
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;6&amp;gt; 下载并安装 calibre，生成电子书使用&lt;/p&gt;
+&lt;p&gt;6&amp;gt; 生成 html 电子书&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 第一次运行需要 sudo&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;7&amp;gt; 下载并安装 calibre，生成电子书使用&lt;/p&gt;
 
 &lt;p&gt;calibre-2.20.0 &lt;a href=&quot;http://calibre-ebook.com/download_osx&quot;&gt;http://calibre-ebook.com/download_osx&lt;/a&gt;&lt;/p&gt;
 
@@ -46,14 +98,14 @@
 &lt;/ul&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/local/bin
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;7&amp;gt; 生成电子书&lt;/p&gt;
+&lt;p&gt;8&amp;gt; 生成电子书&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook epub
 
 或者
 
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gitbook pdf
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;8&amp;gt; .gitignore &lt;a href=&quot;https://github.com/github/gitignore.git&quot;&gt;https://github.com/github/gitignore.git&lt;/a&gt;    &lt;/p&gt;
+&lt;p&gt;8&amp;gt; .gitignore &lt;a href=&quot;https://github.com/github/gitignore.git&quot;&gt;https://github.com/github/gitignore.git&lt;/a&gt;        &lt;/p&gt;
 </content>
  </entry>
  

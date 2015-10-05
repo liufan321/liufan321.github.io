@@ -94,6 +94,56 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/2015/06/24/objc_block_recursion/">
+        BLOCK写递归
+      </a>
+    </h1>
+
+    <span class="post-date">24 Jun 2015</span>
+
+    <p>今天又有同学面试被问到用 blcok 写递归了，写一个留在这里哈，有兴趣的同学面试前查阅一下。</p>
+
+<p>首先来一个 oc 的递归：</p>
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">sum:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">num</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">num</span> <span class="o">+</span> <span class="p">[</span><span class="nb">self</span> <span class="nl">sum</span><span class="p">:</span><span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>写递归算法只需要记住两点即可：</p>
+
+<ol>
+<li>有一个明确的出口</li>
+<li>不满足条件出口时，自己调用自己</li>
+</ol>
+
+<p>按照以上思路用 block 改写一下：</p>
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">static</span> <span class="nf">int</span> <span class="p">(</span><span class="o">^</span><span class="n">sumBlock</span><span class="p">)(</span><span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="o">^</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">num</span> <span class="o">+</span> <span class="n">sumBlock</span><span class="p">(</span><span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">};</span> 
+</code></pre></div>
+<p>注意，要做到自己调用自己，需要能够准确的在内存中找到 <code>block</code> 的函数入口，因此需要使用 <code>static</code> 修饰符号，其他就没啥了</p>
+
+<p>另外，面试中如果被问到，一定要说下：</p>
+
+<ol>
+<li>每调用一次自己，系统都会开辟一个栈桢记录临时变量和参数</li>
+<li>递归次数过多，会出现栈溢出错误</li>
+<li>移动开发中不建议使用递归算法，现在主线程栈区只有 <code>512K</code></li>
+</ol>
+
+<p>上面的测试代码调用 <code>NSLog(@&quot;%d&quot;, sumBlock(1024 * 128));</code> 就会出现栈溢出错误</p>
+
+<p>提问：为啥 <code>1024 * 128</code> 会栈溢出呢？:P</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/2015/02/26/gitbook_config/">
         GitBook 配置
       </a>
@@ -106,10 +156,11 @@
 <p>node-v0.12.0.pkg <a href="http://nodejs.org/download/">http://nodejs.org/download/</a></p>
 
 <p>2&gt; 安装 gitbook</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>npm install gitbook -g
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sudo npm install gitbook-cli -g
 </code></pre></div>
 <p>3&gt; 进入终端 cd 到新建的电子书目录</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>touch SUMMARY.md
+<span class="c"># 第一次运行需要 sudo</span>
 <span class="nv">$ </span>gitbook init
 </code></pre></div>
 <p>4&gt; 下载并安装 gitbookEditor，gitbook 本地编辑器 <a href="https://github.com/GitbookIO/editor/releases">https://github.com/GitbookIO/editor/releases</a></p>
@@ -119,9 +170,14 @@
 </ul>
 
 <p>5&gt; 本地预览</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gitbook serve
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 第一次运行需要 sudo</span>
+<span class="nv">$ </span>gitbook serve
 </code></pre></div>
-<p>6&gt; 下载并安装 calibre，生成电子书使用</p>
+<p>6&gt; 生成 html 电子书</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 第一次运行需要 sudo</span>
+<span class="nv">$ </span>gitbook build
+</code></pre></div>
+<p>7&gt; 下载并安装 calibre，生成电子书使用</p>
 
 <p>calibre-2.20.0 <a href="http://calibre-ebook.com/download_osx">http://calibre-ebook.com/download_osx</a></p>
 
@@ -130,14 +186,14 @@
 </ul>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/local/bin
 </code></pre></div>
-<p>7&gt; 生成电子书</p>
+<p>8&gt; 生成电子书</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gitbook epub
 
 或者
 
 <span class="nv">$ </span>gitbook pdf
 </code></pre></div>
-<p>8&gt; .gitignore <a href="https://github.com/github/gitignore.git">https://github.com/github/gitignore.git</a>    </p>
+<p>8&gt; .gitignore <a href="https://github.com/github/gitignore.git">https://github.com/github/gitignore.git</a>        </p>
 
   </div>
   
