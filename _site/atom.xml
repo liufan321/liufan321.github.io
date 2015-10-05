@@ -4,7 +4,7 @@
  <title>Joy iOS</title>
  <link href="https://liufan321.github.io/atom.xml" rel="self"/>
  <link href="https://liufan321.github.io/"/>
- <updated>2015-10-05T21:29:40+08:00</updated>
+ <updated>2015-10-05T21:37:21+08:00</updated>
  <id>https://liufan321.github.io</id>
  <author>
    <name>老刘</name>
@@ -292,14 +292,9 @@ $ gatherheaderdoc ~/Desktop/docs
 &lt;h3&gt;3. 安装相关软件&lt;/h3&gt;
 
 &lt;p&gt;本环节的步骤只需执行一次即可：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ gem install bundler
-$ gem install github-pages
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ gem install jekyll
+$ jekyll new [username].github.io.git
 $ cd [username].github.io.git
-$ vim Gemfile
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;在 Gemfile 中粘贴以下内容&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;source &amp;#39;https://rubygems.org&amp;#39;
-gem &amp;#39;github-pages&amp;#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;4. 选择并安装 Jekyll 模版&lt;/h3&gt;
 
@@ -325,7 +320,7 @@ title: 博文主题
 ---
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;当然啦，在编写博客的时候测试，测试是必不可少的。打开终端中，进入本地博客代码库的主目录，然后输入：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ bundle exec jekyll serve
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ jekyll serve
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;接着打开浏览器，在地址栏中输入&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;http://localhost:4000

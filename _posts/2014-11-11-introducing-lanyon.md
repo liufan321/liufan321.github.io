@@ -28,17 +28,9 @@ $ git clone https://github.com/[username]/[username].github.io.git
 本环节的步骤只需执行一次即可：
 
 ```
-$ gem install bundler
-$ gem install github-pages
+$ gem install jekyll
+$ jekyll new [username].github.io.git
 $ cd [username].github.io.git
-$ vim Gemfile
-```
-
-在 Gemfile 中粘贴以下内容
-
-```
-source 'https://rubygems.org'
-gem 'github-pages'
 ```
 
 ### 4. 选择并安装 Jekyll 模版
@@ -71,7 +63,7 @@ title: 博文主题
 当然啦，在编写博客的时候测试，测试是必不可少的。打开终端中，进入本地博客代码库的主目录，然后输入：
 
 ```
-$ bundle exec jekyll serve
+$ jekyll serve
 ```
 
 接着打开浏览器，在地址栏中输入
