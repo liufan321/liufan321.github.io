@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      自定义 NSLog &middot; Joy iOS
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0b">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>乐人之乐，人亦乐其乐</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">首页</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About Me</a>
+        
+      
+    
+      
+    
+
+    <a class="sidebar-nav-item" href="http://github.com/liufan321">GitHub project</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2015. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Joy iOS</a>
+            <small>享受编程之美，尽享开发乐趣……</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">自定义 NSLog</h1>
+  <span class="post-date">05 Oct 2015</span>
+  <h2>问题</h2>
+
+<ul>
+<li>开发中用了大量的 <code>NSLog</code>，但是发布时想取消这些 <code>NSLog</code> </li>
+<li>开发中是否经常用过 <code>NSLog(@&quot;%s&quot;, __FUNCTION__);</code></li>
+</ul>
+
+<h2>解决问题</h2>
+
+<ul>
+<li>新建 <code>ExtendNSLog</code> 类，继承自 <code>NSObject</code></li>
+<li>在 <code>ExtendNSLog.h</code> 中删除默认代码</li>
+<li>添加以下函数声明：</li>
+</ul>
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="kt">void</span> <span class="nf">ExtendNSLog</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span> <span class="kt">int</span> <span class="n">lineNumber</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">functionName</span><span class="p">,</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">format</span><span class="p">,</span> <span class="p">...);</span>
+</code></pre></div>
+<ul>
+<li>在 <code>ExtendNSLog.m</code> 中删除默认代码</li>
+<li>添加以下代码实现：</li>
+</ul>
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="kt">void</span> <span class="nf">ExtendNSLog</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span> <span class="kt">int</span> <span class="n">lineNumber</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">functionName</span><span class="p">,</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">format</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
+
+    <span class="kt">va_list</span> <span class="n">ap</span><span class="p">;</span>
+
+    <span class="n">va_start</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="n">format</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">format</span> <span class="nl">hasSuffix</span><span class="p">:</span> <span class="s">@&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">])</span> <span class="p">{</span>
+        <span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="n">format</span> <span class="nl">stringByAppendingString</span><span class="p">:</span> <span class="s">@&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="bp">NSString</span> <span class="o">*</span><span class="n">body</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFormat</span><span class="p">:</span><span class="n">format</span> <span class="nl">arguments</span><span class="p">:</span><span class="n">ap</span><span class="p">];</span>
+
+    <span class="n">va_end</span><span class="p">(</span><span class="n">ap</span><span class="p">);</span>
+
+    <span class="bp">NSString</span> <span class="o">*</span><span class="n">fileName</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSString</span> <span class="nl">stringWithUTF8String</span><span class="p">:</span><span class="n">file</span><span class="p">]</span> <span class="n">lastPathComponent</span><span class="p">];</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;(%s) (%s:%d) %s&quot;</span><span class="p">,</span>
+            <span class="n">functionName</span><span class="p">,</span>
+            <span class="p">[</span><span class="n">fileName</span> <span class="n">UTF8String</span><span class="p">],</span>
+            <span class="n">lineNumber</span><span class="p">,</span>
+            <span class="p">[</span><span class="n">body</span> <span class="n">UTF8String</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>新建 <code>PrefixHeader.pch</code> 文件</li>
+<li>输入以下内容：</li>
+</ul>
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#ifdef __OBJC__</span>
+
+<span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="cp">#import &quot;ExtendNSLog.h&quot;</span>
+
+<span class="cp">#ifdef DEBUG</span>
+<span class="cp">#define NSLog(args...) ExtendNSLog(__FILE__, __LINE__, __PRETTY_FUNCTION__, args);</span>
+<span class="cp">#else</span>
+<span class="cp">#define NSLog(x...)</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#endif</span>
+</code></pre></div>
+<ul>
+<li>选择 <code>项目</code>-&gt;<code>TARGETS</code>-&gt;<code>[ProjectName]</code>-&gt;<code>Build Settings</code></li>
+<li>在搜索框输入 <code>prefix header</code></li>
+<li>在 <code>Prefix Header</code>中输入 <code>[ProjectName]/PrefixHeader.pch</code></li>
+<li>如下图所示</li>
+</ul>
+
+<p><img src="/assets/20151005-01-set_prefix_header.png" alt=""></p>
+
+<ul>
+<li>运行测试，如下图修改运行模式</li>
+</ul>
+
+<p><img src="/assets/20151005-02-set_scheme_mode.png" alt=""></p>
+
+<blockquote>
+<p>搞定收工！</p>
+</blockquote>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="//2015/06/24/objc_block_recursion/">
+            BLOCK写递归
+            <small>24 Jun 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="//2015/02/26/gitbook_config/">
+            GitBook 配置
+            <small>26 Feb 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="//2015/01/12/ns_enum_vs_ns_options/">
+            NS_ENUM & NS_OPTIONS
+            <small>12 Jan 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>
