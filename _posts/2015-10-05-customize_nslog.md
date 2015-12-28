@@ -10,56 +10,16 @@ title: 自定义 NSLog
 
 ## 解决问题
 
-* 新建 `ExtendNSLog` 类，继承自 `NSObject`
-* 在 `ExtendNSLog.h` 中删除默认代码
-* 添加以下函数声明：
-
-```objc
-void ExtendNSLog(const char *file, int lineNumber, const char *functionName, NSString *format, ...);
-```
-
-* 在 `ExtendNSLog.m` 中删除默认代码
-* 添加以下代码实现：
-
-```objc
-void ExtendNSLog(const char *file, int lineNumber, const char *functionName, NSString *format, ...) {
-    
-    va_list ap;
-    
-    va_start(ap, format);
-    
-    if (![format hasSuffix: @"\n"]) {
-        format = [format stringByAppendingString: @"\n"];
-    }
-    
-    NSString *body = [[NSString alloc] initWithFormat:format arguments:ap];
-    
-    va_end(ap);
-    
-    NSString *fileName = [[NSString stringWithUTF8String:file] lastPathComponent];
-    fprintf(stderr, "(%s) (%s:%d) %s",
-            functionName,
-            [fileName UTF8String],
-            lineNumber,
-            [body UTF8String]);
-}
-```
-
 * 新建 `PrefixHeader.pch` 文件
 * 输入以下内容：
 
 ```objc
 #ifdef __OBJC__
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-
-#import "ExtendNSLog.h"
-
 #ifdef DEBUG
-#define NSLog(args...) ExtendNSLog(__FILE__, __LINE__, __PRETTY_FUNCTION__, args);
+#define NSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
-#define NSLog(x...)
+#define NSLog(...)
 #endif
 
 #endif
